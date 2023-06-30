@@ -375,6 +375,7 @@ th.table-header {
       return {
         'Fecha': row.cells[0].textContent,
         'Estado de Asistencia': row.cells[1].textContent,
+        'Ocurrencia': row.cells[2].textContent,
       };
     });
 
