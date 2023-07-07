@@ -1,5 +1,8 @@
 package pe.edu.vallegrande.app.modelo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class student {
 
 	private String id;
@@ -158,7 +161,26 @@ public class student {
 				+ ", last_names=" + last_names + ", birthdate=" + birthdate + ", section=" + section + ", grade="
 				+ grade + ", email=" + email + ", phone=" + phone_proxy + ", code_ubigeo=" + code_ubigeo + "]";
 	}
+	
+	public String getFormattedBirthdate() {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = "";
 
+        try {
+            Date birthdate = inputFormat.parse(this.getBirthdate());
+            formattedDate = outputFormat.format(birthdate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            formattedDate = "Fecha Desconocida";
+        }
+
+        return formattedDate;
+    }
+	
+
+
+	
 	public String getCityFromUbigeo() {
 		String ubigeo = this.getCode_ubigeo();
 		// Lógica para mapear los códigos de ubigeo a las ciudades correspondientes

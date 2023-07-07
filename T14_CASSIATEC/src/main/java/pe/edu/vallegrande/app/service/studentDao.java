@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.vallegrande.app.db.Conexion;
-import pe.edu.vallegrande.app.modelo.person;
 import pe.edu.vallegrande.app.modelo.student;
 
 public class studentDao {
@@ -295,29 +294,39 @@ public class studentDao {
 	    return studentList;
 	}
 
-	public student actualizar(student s) {
-		String sql = "update student set document_type=?, document_number=?, turn=?, names=?, last_names=?, birthdate=?, section=?, grade=?, email=?, phone_proxy=?, code_ubigeo=? where id=?";
-		try {
-			con = c.conectar();
-			ps = con.prepareStatement(sql);
-			ps.setString(1, s.getDocument_type());
-			ps.setString(2, s.getDocument_number());
-			ps.setString(3, s.getTurn());
-			ps.setString(4, s.getNames());
-			ps.setString(5, s.getLast_names());
-			ps.setString(6, s.getBirthdate());
-			ps.setString(7, s.getSection());
-			ps.setString(8, s.getGrade());
-			ps.setString(9, s.getEmail());
-			ps.setString(10, s.getPhone_proxy());
-			ps.setString(11, s.getCode_ubigeo());
-			ps.setString(12, s.getId());
-			ps.executeUpdate();
-		} catch (Exception e) {
-		}
-		return s;
-	}
 
+
+	//actualizar
+		public int actualizar(student s) {
+			int r = 0;
+			String sql = "update student set document_type=?, document_number=?, turn=?, names=?, last_names=?, birthdate=?, section=?, grade=?, email=?, phone_proxy=?, code_ubigeo=? where id=?";
+			try {
+				con = c.conectar();
+				ps = con.prepareStatement(sql);
+				ps.setString(1, s.getDocument_type());
+				ps.setString(2, s.getDocument_number());
+				ps.setString(3, s.getTurn());
+				ps.setString(4, s.getNames());
+				ps.setString(5, s.getLast_names());
+				ps.setString(6, s.getBirthdate());
+				ps.setString(7, s.getSection());
+				ps.setString(8, s.getGrade());
+				ps.setString(9, s.getEmail());
+				ps.setString(10, s.getPhone_proxy());
+				ps.setString(11, s.getCode_ubigeo());
+				ps.setString(12, s.getId());
+				ps.executeUpdate();
+				r = ps.executeUpdate();
+				if (r == 1) {
+					r = 1;
+				} else {
+					r = 0;
+				}
+			} catch (Exception e) {
+				System.out.println("Error al actualizar: " + e.getMessage());
+			}
+			return r;
+		}
 	//Eliminado fisico
 	public void delete(String id) {
 		String sql = "delete from student where id=" + id;

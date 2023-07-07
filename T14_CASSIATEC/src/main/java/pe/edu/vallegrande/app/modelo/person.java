@@ -178,7 +178,7 @@ public class person {
 	    } else if (turn.equals("D")) {
 	      return "Dia";
 	    } else {
-	      return "dia Desconocida";
+	      return "genero Desconocida";
 	    }
 	  }
 	
@@ -197,7 +197,7 @@ public class person {
 	
 	public String getGenderDB() {
 	    String gender = this.getGender();
-	    // Lógica para mapear los generos de ubigeo a las ciudades correspondientes
+	    // Lógica para mapear los códigos de ubigeo a las ciudades correspondientes
 	    if (gender.equals("M")) {
 	      return "Masculino";
 	    } else if (gender.equals("F")) {

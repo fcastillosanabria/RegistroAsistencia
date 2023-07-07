@@ -126,7 +126,7 @@ html, body {
 											<div class="d-flex flex-column align-items-center p-3">
 												<img src="img\iconoUSUARIO.png" alt="Logo CASSIATEC"
 													class="logo-img" style="height: 6rem"><span
-													class="align-self-center">Auxiliar</span>
+													class="align-self-center">Estudiante</span>
 												<button class="btn btn-danger mt-2" data-bs-toggle="modal"
 													data-bs-target="#confirmLogoutModal">Cerrar sesión</button>
 											</div>
@@ -196,7 +196,7 @@ html, body {
 						currentDateElement.textContent = currentDate;
 					}
 				</script>
-
+					
 				<!-- Modal -->
 				<div class="modal fade" id="confirmLogoutModal" tabindex="-1"
 					aria-labelledby="confirmLogoutModalLabel" aria-hidden="true">
@@ -252,8 +252,7 @@ html, body {
 												</div>
 												<div class="col">
 													<button type="submit" class="btn btn-success" name="accion"
-														value="ListarNOMBREyAPELLIDO">Me siento con
-														suerte</button>
+														value="ListarNOMBREyAPELLIDO">Buscar Estudiante</button>
 												</div>
 											</div>
 											<div class="col-4 mb-3">
@@ -284,7 +283,7 @@ html, body {
 						</div>
 						<div class="col">
 							<div class="container mx-auto text-center">
-								<h3>Student Activos</h3>
+								<h3>Alumnas SRC</h3>
 								<form class="mb-3" action="Controlador2" method="POST">
 									<input class="btn btn-primary" type="submit" name="accion"
 										value="listar">

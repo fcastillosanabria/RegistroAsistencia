@@ -394,7 +394,7 @@ td.table-cell {
 					<!-- action="Controlador2" method="POST" -->
 					<form action="Controlador2" method="POST">
 						<div class="contenido">
-							<table class="table table-bordered" id="tablaStudent">
+							<table class="table table-bordered" id="tablaPerson">
 								<thead>
 									<tr>
 										<th class="table-header">N° DOC</th>
@@ -424,10 +424,10 @@ td.table-cell {
 												name="attendanceOcurrencia_${student.getId()}"
 												id="attendanceOcurrencia_${student.getId()}"
 												placeholder="Escribe la ocurrencia"></td>
-
+											
+											
 											<td class="table-cell">
-
-												<form action="Controlador2" method="POST">
+											<form action="Controlador2" method="POST">
 													<input type="hidden" name="studentId"
 														value="${student.getId()}" /> <input type="hidden"
 														name="studentDocument"
@@ -440,7 +440,6 @@ td.table-cell {
 													<button type="submit" class="btn btn-warning" name="accion"
 														value="GenerarReporte">Generar Reporte</button>
 												</form>
-
 											</td>
 										</tr>
 									</c:forEach>
@@ -450,6 +449,7 @@ td.table-cell {
 						<input type="submit" class="btn btn-info w-25" name="accion"
 							value="GuardarAsistencia">
 					</form>
+
 
 				</div>
 			</div>

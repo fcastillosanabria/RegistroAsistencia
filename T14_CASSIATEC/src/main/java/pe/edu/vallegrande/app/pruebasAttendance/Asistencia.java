@@ -18,14 +18,12 @@ public class Asistencia {
 	    Attendance attendance1 = new Attendance();
 	    attendance1.setStudentId("2"); // Reemplazar ID del estudiante correspondiente
 	    attendance1.setAttendanceStatus("A"); // Reemplaza "A" con el estado de asistencia deseado (A, T, J)
-	    attendance1.setAttendance_ocurrencia("Llego temprano");
 	    listaAttendances.add(attendance1);
 
 	    // Agregar más objetos Attendance a la lista si es necesario
 	    Attendance attendance2 = new Attendance();
-	    attendance2.setStudentId("5"); // Reemplazar ID del estudiante correspondiente
+	    attendance2.setStudentId("10"); // Reemplazar ID del estudiante correspondiente
 	    attendance2.setAttendanceStatus("F"); // Reemplaza "A" con el estado de asistencia deseado (A, T, J)
-	    attendance2.setAttendance_ocurrencia("Dicen que hubo mucho transito");
 	    listaAttendances.add(attendance2);
 
 	    int result = attendanceDao.guardarAsistenciaGrupal(listaAttendances);

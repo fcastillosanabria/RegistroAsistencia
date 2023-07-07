@@ -70,6 +70,7 @@ public class Controlador2 extends HttpServlet {
 			    request.setAttribute("student", student);
 			    request.getRequestDispatcher("ResultadoVerDocStudent.jsp").forward(request, response);
 			    break;
+			    
 			case "ListarNOMBREyAPELLIDO":
 			    String names = request.getParameter("txtNames");
 			    String lastNames = request.getParameter("txtLast_names");
@@ -85,6 +86,7 @@ public class Controlador2 extends HttpServlet {
 			    }
 			    request.getRequestDispatcher("MostrarNombreApellidoStudent.jsp").forward(request, response);
 			    break;
+			    
 			case "ListarNOMBREyAPELLIDOeliminados":
 			    String names1 = request.getParameter("txtNames");
 			    String lastNames1 = request.getParameter("txtLast_names");
@@ -187,16 +189,39 @@ public class Controlador2 extends HttpServlet {
 				st.setPhone_proxy(Phone_proxy1);
 				st.setCode_ubigeo(Code_ubigeo1);
 				dao.actualizar(st);
-				request.getRequestDispatcher("Controlador2?accion=listar").forward(request, response);
-				break;
+				 // Realizar la actualización en la base de datos
+			    int resultadoActualizacion = dao.actualizar(st);
+
+			    // Verificar el resultado de la actualización
+			    if (resultadoActualizacion > 0) {
+			        // La actualización fue exitosa
+			        String mensajeResultadoActualizacion = "Se ha actualizado el person con éxito";
+			        request.setAttribute("Actualizar", true);
+			        request.setAttribute("mensajeResultadoActualizacion", mensajeResultadoActualizacion);
+			        request.getRequestDispatcher("Controlador2?accion=listar").forward(request, response);
+			    } else {
+			        // La actualización no fue exitosa
+			        String mensajeResultadoActualizacion = "No se pudo actualizar el person. Por favor, verifique que los datos sean únicos y no deje campos vacíos";
+
+			        // Guardar el resultado y el objeto pe en variables de solicitud
+			        request.setAttribute("Actualizar", false);
+			        request.setAttribute("mensajeResultadoActualizacion", mensajeResultadoActualizacion);
+			        request.setAttribute("st", st);
+
+			        // Redireccionar a la acción "Editar" con los datos del objeto pe
+			        request.getRequestDispatcher("Controlador2?accion=Editar&id=" + id1).forward(request, response);
+			    }
+			    break;
 			case "Delete":
 				String id2 = request.getParameter("id");
 				dao.deleteLogico(id2);
+				request.setAttribute("eliminado", true);
 				request.getRequestDispatcher("Controlador2?accion=listar").forward(request, response);
 				break;
 			case "Reactivar":
 				String id3 = request.getParameter("id");
 				dao.activacionLogico(id3);
+				request.setAttribute("reactivado", true);
 				request.getRequestDispatcher("Controlador2?accion=listar").forward(request, response);
 				break;
 			case "EliminadoFisico":
@@ -204,6 +229,12 @@ public class Controlador2 extends HttpServlet {
 				dao.delete(id4);
 				request.getRequestDispatcher("Controlador2?accion=ListarEliminados").forward(request, response);
 				break;
+			case "DeleteDOC":
+			    String id5 = request.getParameter("id");
+			    dao.deleteLogico(id5);
+			    request.setAttribute("eliminado", true);
+			    request.getRequestDispatcher("Controlador2?accion=ListarEliminados").forward(request, response);
+			    break;
 			case "BuscarAula":		    
 			    String grado = request.getParameter("txtGrade");
 	            String seccion = request.getParameter("txtSection");

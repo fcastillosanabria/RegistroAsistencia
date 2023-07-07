@@ -102,6 +102,7 @@ html, body {
 }
 </style>
 <body>
+
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div
@@ -169,7 +170,7 @@ html, body {
 										aria-labelledby="logoutDropdown">
 										<li>
 											<div class="d-flex flex-column align-items-center p-3">
-												<img src="img\iconoUSUARIO.png" alt="Logo CASSIATEC"
+												<img src="img\Icono_Estudiante.png" alt="Logo CASSIATEC"
 													class="logo-img" style="height: 6rem"><span
 													class="align-self-center">Auxiliar</span>
 												<button class="btn btn-danger mt-2" data-bs-toggle="modal"
@@ -287,7 +288,7 @@ html, body {
 						<div class="card-body">
 							<!-- Aquí puedes agregar los datos del person (auxiliar o director) -->
 							<h2 class="text-center mt-4">Actualizar Student</h2>
-
+								
 							<form action="Controlador2" method="POST">
 
 								<!-- AQUI VAN LOS DIV QUE NO SE DEBEN MOSTRAR EN LA INTERFAZ -->
@@ -308,7 +309,7 @@ html, body {
 								<div class="row">
 									<div
 										class="col-lg-6 mb-3 text-center d-flex justify-content-center">
-										<img src="img/iconoUSUARIO.png" alt="Usuario" width="100"
+										<img src="img/Icono_Estudiante.png" alt="Usuario" width="100"
 											height="100" class="align-self-center">
 									</div>
 									<div class="col-lg-6">
@@ -602,9 +603,13 @@ html, body {
 											<label for="txtSection">SECCION:</label> <select
 												class="form-control" name="txtSection" id="txtSection">
 												<option value="${student.getSection()}">${student.getSection()}</option>
-												<option value=""disabled>Eliga su genero</option>
-												<option value="M">Masculino</option>
-												<option value="F">Femenino</option>
+												<option value=""disabled>Eliga su Seccion</option>
+												<option value="A">Sección A</option>
+												<option value="B">Sección B</option>
+												<option value="C">Sección C</option>
+												<option value="D">Sección D</option>
+												<option value="E">Sección E</option>
+												<option value="F">Sección F</option>
 											</select>
 											<div id="sectionNotice" class="input-notice"></div>
 										</div>

@@ -73,7 +73,39 @@ html, body {
 <body
 	class="custom-bg d-flex justify-content-center align-items-center vh-100">
 
-
+<%-- Verificar si el atributo "eliminado" está presente --%>
+<% if (request.getAttribute("eliminado") != null) { %>
+    <div class="alert alert-danger alert-dismissible fade show position-fixed" style="z-index: 9999; top: 50px; left: 50%; transform: translateX(-50%);" role="alert" id="alertaEliminado">
+        <h4>El registro ha sido eliminado correctamente.</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <script>
+        // Obtener la referencia a la alerta
+        var alerta = document.getElementById('alertaEliminado');
+        
+        // Ocultar la alerta después de 4 segundos
+        setTimeout(function() {
+            alerta.style.display = 'none';
+        }, 4000);
+    </script>
+ <% } %>
+    
+    	<%-- Verificar si el atributo "reactivado" está presente --%>
+<% if (request.getAttribute("reactivado") != null) { %>
+    <div class="alert alert-success alert-dismissible fade show position-fixed" style="z-index: 9999; top: 50px; left: 50%; transform: translateX(-50%);" role="alert" id="alertaReactivado">
+        <h4>El registro ha reactivado correctamente.</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <script>
+        // Obtener la referencia a la alerta
+        var alerta = document.getElementById('alertaReactivado');
+        
+        // Ocultar la alerta después de 4 segundos
+        setTimeout(function() {
+            alerta.style.display = 'none';
+        }, 4000);
+    </script>
+<% } %>
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
 			<div
@@ -269,8 +301,7 @@ html, body {
 												</div>
 												<div class="col">
 													<button type="submit" class="btn btn-success" name="accion"
-														value="ListarNOMBREyAPELLIDOeliminados">Me siento
-														con suerte</button>
+														value="ListarNOMBREyAPELLIDOeliminados">Buscar Estudiante</button>
 												</div>
 											</div>
 											<div class="col-4 mb-3">
@@ -374,10 +405,17 @@ html, body {
 												<button id="descargarPDF">
 													<img src="img\PDF.png" alt="Descargar PDF"
 														style="height: 4rem">
+													<h4>PDF</h4>
 												</button>
 												<button id="descargarExcel">
 													<img src="img\EXCEL.png" alt="Descargar EXCEL"
 														style="height: 4rem">
+													<h4>EXCEL</h4>
+												</button>
+												<button id="descargarCSV">
+													<img src="img\CSV.png" alt="Descargar CSV"
+														style="height: 4rem">
+													<h4>CSV</h4>
 												</button>
 											</div>
 											<div class="modal-footer">
@@ -426,7 +464,7 @@ html, body {
 										<td>${dato.getTurn()}</td>
 										<td>${dato.getNames()}</td>
 										<td>${dato.getLast_names()}</td>
-										<td>${dato.getBirthdate()}</td>
+										<td>${dato.getFormattedBirthdate()}</td>
 										<td>${dato.getSection()}</td>
 										<td>${dato.getGrade()}</td>
 										<td>${dato.getEmail()}</td>
@@ -482,6 +520,63 @@ html, body {
 				<script
 					src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
 				<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+<script>
+// Exportar a CSV
+function exportToCSV(data, filename) {
+  const csvData = convertToCSV(data);
+  const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  if (link.download !== undefined) {
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+}
+
+// Convertir los datos a formato CSV
+function convertToCSV(data) {
+  const csvArray = [];
+  const header = Object.keys(data[0]);
+  csvArray.push(header.join(','));
+
+  data.forEach((item) => {
+    const row = Object.values(item);
+    csvArray.push(row.join(','));
+  });
+
+  return csvArray.join('\n');
+}
+
+// Conectar al botón de descarga
+const descargarCSVBtn = document.getElementById('descargarCSV');
+descargarCSVBtn.addEventListener('click', function () {
+  // Llamamos a la tabla y colocamos los datos
+  const table = document.getElementById('tablaStudent');
+  const data = Array.from(table.rows).slice(1).map(function (row) {
+	  return {
+	        'TIPO DOC': row.cells[0].textContent,
+	        'N° DOC': row.cells[1].textContent,
+	        'TURNO': row.cells[2].textContent,
+	        'NOMBRE': row.cells[3].textContent,
+	        'APELLIDO': row.cells[4].textContent,
+	        'NACIMIENTO': row.cells[5].textContent,
+	        'SECCION': row.cells[6].textContent,
+	        'GRADO': row.cells[7].textContent,
+	        'EMAIL': row.cells[8].textContent,
+	        'TELEFONO DEL APODERADO': row.cells[9].textContent,
+	        'UBIGEO': row.cells[10].textContent,
+	      };
+	    });
+
+  const filename = 'Listado_Student_Inactivos.csv';
+  exportToCSV(data, filename);
+});
+</script>
 
 				<script>
 				// Exportar a Excel

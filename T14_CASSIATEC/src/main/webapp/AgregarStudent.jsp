@@ -168,7 +168,7 @@ html, body {
 										aria-labelledby="logoutDropdown">
 										<li>
 											<div class="d-flex flex-column align-items-center p-3">
-												<img src="img\iconoUSUARIO.png" alt="Logo CASSIATEC"
+												<img src="img\Icono_Estudiante.png" alt="Logo CASSIATEC"
 													class="logo-img" style="height: 6rem"><span
 													class="align-self-center">Auxiliar</span>
 												<button class="btn btn-danger mt-2" data-bs-toggle="modal"
@@ -294,7 +294,7 @@ html, body {
 									</div>
 									<div
 										class="col-lg-6 mb-3 text-center d-flex justify-content-center">
-										<img src="img/iconoUSUARIO.png" alt="Usuario" width="100"
+										<img src="img/Icono_Estudiante.png" alt="Usuario" width="100"
 											height="100" class="align-self-center">
 									</div>
 									<div class="col-lg-6">
@@ -525,7 +525,7 @@ html, body {
 											<label for="txtTurn">TURNO:</label> <select
 												class="form-control" name="txtTurn" id="txtTurn">
 												<option value="" disabled selected>Elegir el turno</option>
-												<option value="DIA">Mañana</option>
+												<option value="DIA">Dia</option>
 												<option value="TARDE">Tarde</option>
 											</select>
 											<div id="turnNotice" class="input-notice"></div>

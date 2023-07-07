@@ -126,7 +126,7 @@ html, body {
 											<div class="d-flex flex-column align-items-center p-3">
 												<img src="img\iconoUSUARIO.png" alt="Logo CASSIATEC"
 													class="logo-img" style="height: 6rem"><span
-													class="align-self-center">Auxiliar</span>
+													class="align-self-center">Estudiante</span>
 												<button class="btn btn-danger mt-2" data-bs-toggle="modal"
 													data-bs-target="#confirmLogoutModal">Cerrar sesión</button>
 											</div>
@@ -283,9 +283,17 @@ html, body {
 
 										<button type="submit" class="btn btn-primary" name="accion"
 											value="ListarDNIoCNE">Buscar</button>
+											
+											<input class="btn btn-primary" type="submit" name="accion"
+										value="listar">
+											
 										<div class="col-lg-8 offset-lg-4">
-											<button type="button" class="btn btn-success">Actualizar</button>
-											<button type="button" class="btn btn-danger">Eliminar</button>
+											<input type="hidden" name="id" value="${student.getId()}">
+											<br>
+											<button type="submit" class="btn btn-success" name="accion"
+													value="Editar">Actualizar</button>
+											<button type="submit" class="btn btn-danger" name="accion"
+												value="DeleteDOC">Eliminar</button>
 										</div>
 									</form>
 								</div>
@@ -303,7 +311,7 @@ html, body {
 
 												<div class="row">
 													<div class="col-lg-6 mb-3 text-center">
-														<img src="img/iconoUSUARIO.png" alt="Usuario" width="100"
+														<img src="img/Icono_Estudiante.png" alt="Usuario" width="100"
 															height="100">
 													</div>
 													<div class="col-lg-6">
