@@ -374,8 +374,16 @@ td.table-cell {
 
 						<div class="text-left">
 							<input type="submit" class="btn btn-success w-25" name="accion"
-								value="BuscarAula"> <input type="submit"
-								class="btn btn-danger w-25" name="accion" value="UsarQR">
+								value="BuscarAula">
+
+							<button type="button" class="btn btn-danger w-25"
+								onclick="RegistrarQR()">Usar QR</button>
+							<script>
+								function RegistrarQR() {
+									// Redireccionar a la página de inicio de sesión
+									window.location.href = "RegistrarQR.jsp";
+								}
+							</script>
 
 						</div>
 
@@ -424,10 +432,10 @@ td.table-cell {
 												name="attendanceOcurrencia_${student.getId()}"
 												id="attendanceOcurrencia_${student.getId()}"
 												placeholder="Escribe la ocurrencia"></td>
-											
-											
+
+
 											<td class="table-cell">
-											<form action="Controlador2" method="POST">
+												<form action="Controlador2" method="POST">
 													<input type="hidden" name="studentId"
 														value="${student.getId()}" /> <input type="hidden"
 														name="studentDocument"

@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="100x100"
 	href="img\Insignia SRC.png">
 
-<title>CRUD Person</title>
+<title>Registrar QR</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -19,6 +19,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
 	crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <style>
@@ -35,34 +37,44 @@ html, body {
 	background-color: orange !important;
 }
 
-.table-container {
-	max-height: 300px; /* ajusta la altura máxima según tus necesidades */
-	overflow-y: scroll;
-}
-
 .modal-pink {
 	background-color: pink;
 }
 
-@keyframes move {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-20px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+/* .qrCanvas */
+/* { */
+/* 	width: 100%; */
+/* 	height: 100%; */
+/* 	position: relative; */
+/* 	overflow: hidden; */
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* } */
+
+.video-container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.animated-img {
-  animation: move 2s infinite;
+#videoElement {
+	width: 65%;
+	/* 	height: 80%; */
+	/* 	position: relative; */
+	/* 	overflow: hidden; */
+	/* 	display: flex; */
+	/* 	justify-content: center; */
+	/* 	align-items: center; */
 }
 </style>
 <body>
 
-<jsp:include page="Promocion.jsp"></jsp:include>
+
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
@@ -80,11 +92,13 @@ html, body {
 								class="fs-4 ms-3 d-none d-sm-inline">HOME</span>
 						</a></li>
 						<li class="nav-item py-2 py-sm-0 align-items-center"><a
-							href="#" class="nav-link text-white text-center  active"> <span
+							href="ActualizarMisDatos.jsp"
+							class="nav-link text-white text-center"> <span
 								class="fs-4 ms-3 d-none d-sm-inline">ACTUALIZAR MIS DATOS</span>
 						</a></li>
 						<li class="nav-item py-2 py-sm-0 align-items-center"><a
-							href="RegistrarAsistencia.jsp" class="nav-link text-white text-center"> <span
+							href="RegistrarAsistencia.jsp"
+							class="nav-link text-white text-center active"> <span
 								class="fs-4 ms-3 d-none d-sm-inline">REGISTRAR ASISTENCIA</span>
 						</a></li>
 						<li class="nav-item py-2 py-sm-0 align-items-center"><a
@@ -106,7 +120,7 @@ html, body {
 				</div>
 			</div>
 
-			<div class="col p-0">
+			<div class="col p-0 d-flex flex-column">
 				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 					<div class="container-fluid">
 						<span id="currentDateTime" class="nav-link text-white"> <span
@@ -240,78 +254,114 @@ html, body {
 					</div>
 				</div>
 
-				<div class="p-0">
-
-					<div class="row">
-						<div class="col d-flex align-items-end">
-							<div class="container">
-								<!-- Div para buscar person -->
-								<div class="row">
-									<form action="Controlador" method="POST" class="mb-4">
-										<div class="row">
-											<div class="col-4 mb-3">
-												<div class="form-group">
-													<label for="txtTurn">Nombres:</label> <input type="text"
-														class="form-control mb-2" id="txtNames" name="txtNames"
-														placeholder="Ingrese el Nombre"
-														onkeypress="return validateLetters(event)">
-												</div>
-												<div class="col">
-													<button type="submit" class="btn btn-success" name="accion"
-														value="ListarNOMBREyAPELLIDO">Me siento con
-														suerte</button>
-												</div>
-											</div>
-											<div class="col-4 mb-3">
-												<div class="form-group">
-													<label for="txtTurn">Apellidos:</label> <input type="text"
-														class="form-control" id="txtLast_names"
-														name="txtLast_names" placeholder="Ingrese el Apellido"
-														onkeypress="return validateLetters(event)">
-												</div>
-											</div>
-										</div>
-
-										<!-- 										script para solo colocar letras en los input -->
-										<script>
-											function validateLetters(event) {
-												var key = event.key;
-												var regex = /[a-zA-Z\s]/;
-												if (!regex.test(key)) {
-													event.preventDefault();
-													return false;
-												}
-											}
-										</script>
-
-									</form>
-								</div>
-							</div>
-						</div>
-						<div class="col">
-							<div class="container mx-auto text-center">
-								<h3>Person activos</h3>
-								<form class="mb-3" action="Controlador" method="POST">
-									<input class="btn btn-primary" type="submit" name="accion"
-										value="Listar">
-									<button type="button" class="btn btn-primary"
-										onclick="window.location.href='verDNIoCNE.jsp'">Buscar
-										por N° Doc</button>
-									<input class="btn btn-warning" data-bs-toggle="modal"
-										data-bs-target="#exampleModa2" type="submit" name="accion"
-										value="ListarEliminados">
-								</form>
-							</div>
-						</div>
+				<div class="video-container flex-grow-1" style="background-image: linear-gradient(90deg, rgba(220,53,69,1) 7%, rgba(255,165,0,1) 44%, rgba(255,255,255,1) 100%);">
+					<div style="position: relative;">
+						<video id="videoElement" autoplay style="position: relative;"></video>
+						<canvas id="qrCanvas" style="position: absolute; top: -40%; left: -19%; width: 139%; height: 180%;"></canvas>
+						<div id="qrDataOverlay"
+							style="position: absolute; top: -36%; left: -18%; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;"></div>
+							
+												<button style="position: absolute; top: -20%; left: -18%; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;" type="button" class="btn btn-danger"
+										onclick="volverAlRegistro()">Volver atras</button>
+									<script>
+										function volverAlRegistro() {
+											// Redireccionar a la página deseada
+											window.location.href = "RegistrarAsistencia.jsp";
+										}
+									</script>
 					</div>
-
 				</div>
+
+				<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+				<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const video = document.getElementById('videoElement');
+        const qrCanvas = document.getElementById('qrCanvas');
+        const qrDataOverlay = document.getElementById('qrDataOverlay');
+        const form = document.getElementById('form');
+        const qrCodeInput = document.getElementById('qrCodeInput');
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    processVideo();
+                })
+                .catch(function(error) {
+                    console.log("Error al acceder a la cámara: " + error);
+                });
+        }
+
+        function processVideo() {
+            const canvas = qrCanvas;
+            const context = canvas.getContext('2d');
+
+            setInterval(function() {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, canvas.width, canvas.height);
+
+                if (code) {
+                    console.log("Código QR detectado: " + code.data);
+                    qrDataOverlay.textContent = "Código QR detectado: " + code.data;
+
+                    // Validar el código QR antes de enviarlo al controlador
+                    if (validateQRCode(code.data)) {
+                        // Actualizar el valor del campo oculto con el código QR detectado
+                        qrCodeInput.value = code.data;
+
+                        // Enviar el formulario al controlador
+                        form.submit();
+                    } else {
+                        // Mostrar un mensaje de QR inválido en tiempo real
+                        qrDataOverlay.textContent = "Codigo QR inválido, muestre el codigo QR institucional, gracias";
+                    }
+
+                    // Dibujar el cuadrado verde alrededor del código QR
+                    drawQRCodeRect(code.location, canvas);
+                } else {
+                    qrDataOverlay.textContent = "";
+                }
+            }, 100);
+        }
+
+        function validateQRCode(qrCode) {
+            // Validar la estructura del código QR
+            const qrData = qrCode.split(", ");
+            return qrData.length === 3;
+        }
+
+        function drawQRCodeRect(location, canvas) {
+            const context = canvas.getContext('2d');
+            context.strokeStyle = 'red';
+            context.lineWidth = 8;
+            context.beginPath();
+            context.moveTo(location.topLeftCorner.x, location.topLeftCorner.y);
+            context.lineTo(location.topRightCorner.x, location.topRightCorner.y);
+            context.lineTo(location.bottomRightCorner.x, location.bottomRightCorner.y);
+            context.lineTo(location.bottomLeftCorner.x, location.bottomLeftCorner.y);
+            context.lineTo(location.topLeftCorner.x, location.topLeftCorner.y);
+            context.stroke();
+            context.closePath();
+        }
+    });
+</script>
+
+				<!-- Formulario para enviar los datos al controlador -->
+				<form id="form" action="ControladorQR" method="POST">
+					<input type="hidden" id="qrCodeInput" name="qrCode" value="">
+				</form>
+
+
 
 			</div>
 		</div>
-	</div>
 
-	<script src="https://kit.fontawesome.com/3d22aaea26.js"
-		crossorigin="anonymous"></script>
+
+
+		<script src="https://kit.fontawesome.com/3d22aaea26.js"
+			crossorigin="anonymous"></script>
 </body>
 </html>
