@@ -47,6 +47,8 @@ public class ControladorQR extends HttpServlet {
 
 	    // Enviar una respuesta al front-end
 	    response.getWriter().write("Asistencia guardada exitosamente");
+	    System.out.println("------------------------------------------");
+	    System.out.println("------------------------------------------");
 
 //		// Aquí puedes procesar el código QR y realizar la lógica correspondiente
 //		QRCodeProcessor qrCodeProcessor = new QRCodeProcessor();

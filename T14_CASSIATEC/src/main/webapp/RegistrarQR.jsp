@@ -266,7 +266,7 @@ html, body {
 									<script>
 										function volverAlRegistro() {
 											// Redireccionar a la página deseada
-											window.location.href = "RegistrarAsistencia.jsp";
+											window.location.href = "RegistrarAsistenciaResultados.jsp";
 										}
 									</script>
 					</div>

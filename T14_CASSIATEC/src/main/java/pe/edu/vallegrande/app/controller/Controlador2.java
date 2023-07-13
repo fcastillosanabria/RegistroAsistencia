@@ -301,6 +301,7 @@ public class Controlador2 extends HttpServlet {
 				request.getRequestDispatcher("RegistrarAsistenciaResultados.jsp").forward(request, response);
 				break;
 
+
 			default:
 				throw new AssertionError();
 			}

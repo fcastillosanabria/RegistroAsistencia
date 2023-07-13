@@ -33,8 +33,8 @@ public class QRCodeProcessor {
 
 	private  boolean isStudentRegistered(int studentId) {
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-			 PreparedStatement statement = connection.prepareStatement(
-					 "SELECT * FROM registro_asistencia WHERE id_estudent = ? AND CAST(attendance_datetime AS DATE) = CAST(GETDATE() AS DATE)");) {
+				PreparedStatement statement = connection.prepareStatement(
+						"SELECT * FROM registro_asistencia WHERE id_estudent = ? AND CAST(attendance_datetime AS DATE) = CAST(GETDATE() AS DATE)");) {
 			statement.setInt(1, studentId);
 			ResultSet resultSet = statement.executeQuery();
 			return resultSet.next();
@@ -46,8 +46,8 @@ public class QRCodeProcessor {
 
 	private  void saveAttendanceData(int studentId, String attendanceStatus, String attendanceOcurrencia) {
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-			 PreparedStatement statement = connection.prepareStatement(
-					 "INSERT INTO registro_asistencia (id_estudent, attendance_datetime, attendance_status, attendance_ocurrencia) VALUES (?, GETDATE(), ?, ?)");) {
+				PreparedStatement statement = connection.prepareStatement(
+						"INSERT INTO registro_asistencia (id_estudent, attendance_datetime, attendance_status, attendance_ocurrencia) VALUES (?, GETDATE(), ?, ?)");) {
 			statement.setInt(1, studentId);
 			statement.setString(2, attendanceStatus);
 			statement.setString(3, attendanceOcurrencia);

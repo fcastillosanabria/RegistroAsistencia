@@ -331,15 +331,16 @@ td.table-cell {
 						<div class="text-left">
 							<input type="submit" class="btn btn-success w-25" name="accion"
 								value="BuscarAula">
+								
 
-							<button type="button" class="btn btn-danger w-25"
-								onclick="RegistrarQR()">Usar QR</button>
-							<script>
-								function RegistrarQR() {
-									// Redireccionar a la página de inicio de sesión
-									window.location.href = "RegistrarQR.jsp";
-								}
-							</script>
+<!-- 							<button type="button" class="btn btn-danger w-25" -->
+<!-- 								onclick="RegistrarQR()">Usar QR</button> -->
+<!-- 							<script> -->
+<!--  								function RegistrarQR() { -->
+<!--  									// Redireccionar a la página de inicio de sesión -->
+<!--  									window.location.href = "RegistrarQR.jsp"; -->
+<!--  								} -->
+<!-- 							</script> -->
 						</div>
 					</form>
 				</div>

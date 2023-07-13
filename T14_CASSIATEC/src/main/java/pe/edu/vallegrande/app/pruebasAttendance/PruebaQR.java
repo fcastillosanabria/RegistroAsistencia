@@ -1,4 +1,4 @@
-package pe.edu.vallegrande.app.service;
+package pe.edu.vallegrande.app.pruebasAttendance;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -59,7 +59,7 @@ public class PruebaQR {
 
 	public static void main(String[] args) {
 		// Simulación de lectura del código QR
-		String qrCode = "5, A, He asistido con exito :)";
+		String qrCode = "6, A, He asistido con exito :)";
 
 		// Procesar el código QR
 		processQRCode(qrCode);
