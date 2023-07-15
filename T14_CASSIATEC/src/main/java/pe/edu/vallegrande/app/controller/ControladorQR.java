@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nimbusds.jose.shaded.json.JSONObject;
+
 import pe.edu.vallegrande.app.service.QRCodeProcessor;
 
 /**
@@ -38,17 +40,26 @@ public class ControladorQR extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String qrCode = request.getParameter("qrCode");
-
 	    System.out.println("Código QR recibido: " + qrCode);
 
 	    // Procesar el código QR y guardar la asistencia en la base de datos
 	    QRCodeProcessor qrCodeProcessor = new QRCodeProcessor();
-	    qrCodeProcessor.processQRCode(qrCode);
+	    boolean isRegistered = qrCodeProcessor.processQRCode(qrCode);
 
-	    // Enviar una respuesta al front-end
-	    response.getWriter().write("Asistencia guardada exitosamente");
-	    System.out.println("------------------------------------------");
-	    System.out.println("------------------------------------------");
+	    // Crear un objeto JSON con la información de respuesta
+	    JSONObject jsonResponse = new JSONObject();
+	    if (isRegistered) {
+	        jsonResponse.put("success", false);
+	        jsonResponse.put("message", "Este estudiante ya ha sido registrado hoy");
+	    } else {
+	        jsonResponse.put("success", true);
+	        jsonResponse.put("message", "Asistencia guardada exitosamente");
+	    }
+
+	    // Enviar la respuesta al front-end
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(jsonResponse.toString());
 
 //		// Aquí puedes procesar el código QR y realizar la lógica correspondiente
 //		QRCodeProcessor qrCodeProcessor = new QRCodeProcessor();

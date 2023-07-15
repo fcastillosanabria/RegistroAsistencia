@@ -1,12 +1,13 @@
 package pe.edu.vallegrande.app.modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Attendance {
 
 	private String idAttendance;
     private String studentId;
-    private Date attendanceDateTime;
+    private String attendanceDateTime;
     private String attendanceStatus;
     private String attendance_ocurrencia;
 	
@@ -14,7 +15,7 @@ public class Attendance {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Attendance(String idAttendance, String studentId, Date attendanceDateTime, String attendanceStatus,
+	public Attendance(String idAttendance, String studentId, String attendanceDateTime, String attendanceStatus,
 			String attendance_ocurrencia) {
 		super();
 		this.idAttendance = idAttendance;
@@ -40,11 +41,11 @@ public class Attendance {
 		this.studentId = studentId;
 	}
 
-	public Date getAttendanceDateTime() {
+	public String getAttendanceDateTime() {
 		return attendanceDateTime;
 	}
 
-	public void setAttendanceDateTime(Date attendanceDateTime) {
+	public void setAttendanceDateTime(String attendanceDateTime) {
 		this.attendanceDateTime = attendanceDateTime;
 	}
 
@@ -70,6 +71,21 @@ public class Attendance {
 				+ attendanceDateTime + ", attendanceStatus=" + attendanceStatus + ", attendance_ocurrencia="
 				+ attendance_ocurrencia + "]";
 	}
+	
+	public String getAttendanceDateTimeDB() {
+		try {
+			// Crear un objeto de tipo Date a partir de la cadena de fecha y hora
+			SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+			Date date = sourceFormat.parse(attendanceDateTime);
+
+			// Formatear la fecha y hora en el formato deseado
+			SimpleDateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy - h:mm:ss a");
+			return targetFormat.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
     
 	
 	public String getAttendanceStatusDB() {
@@ -85,7 +101,5 @@ public class Attendance {
 	      return "status Desconocida";
 	    }
 	  }
-
-    
-    
+ 
 }

@@ -85,7 +85,7 @@ public class AttendanceDao {
 	        
 	        while (rs.next()) {
 	            Attendance attendance = new Attendance();
-	            attendance.setAttendanceDateTime(rs.getDate("attendance_datetime"));
+	            attendance.setAttendanceDateTime(rs.getString("attendance_datetime"));
 	            attendance.setAttendanceStatus(rs.getString("attendance_status"));
 	            attendance.setAttendance_ocurrencia(rs.getString("attendance_ocurrencia"));
 	            reporte.add(attendance);

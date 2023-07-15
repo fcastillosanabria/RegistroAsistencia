@@ -11,15 +11,15 @@ public class ReporteIndividual {
 	    AttendanceDao attendanceDao = new AttendanceDao();
 
 	    // Reemplaza "2" con el ID del estudiante correspondiente
-	    String studentId = "5";
+	    String studentId = "3";
 
 	    List<Attendance> attendanceList = attendanceDao.obtenerReporteIndividual(studentId);
 
 	    if (!attendanceList.isEmpty()) {
 	        System.out.println("Reporte de asistencias del estudiante " + studentId + ":");
 	        for (Attendance attendance : attendanceList) {
-	            System.out.println("Fecha: " + attendance.getAttendanceDateTime());
-	            System.out.println("Estado: " + attendance.getAttendanceStatus());
+	            System.out.println("Fecha: " + attendance.getAttendanceDateTimeDB());
+	            System.out.println("Estado: " + attendance.getAttendanceStatusDB());
 	            System.out.println("Ocurrencia: " + attendance.getAttendance_ocurrencia());
 	            System.out.println("------------------------");
 	            System.out.println("------------------------");

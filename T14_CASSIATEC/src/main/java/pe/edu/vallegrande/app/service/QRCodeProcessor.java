@@ -12,23 +12,24 @@ public class QRCodeProcessor {
 	private static final String DB_USER = "sa";
 	private static final String DB_PASSWORD = "francisDE";
 
-	public  void processQRCode(String qrCode) {
+	public boolean  processQRCode(String qrCode) {
 		// Extraer los datos del código QR
 		String[] qrData = qrCode.split(", ");
 		int studentId = Integer.parseInt(qrData[0]);
 		String attendanceStatus = qrData[1];
 		String attendanceOcurrencia = qrData[2];
 
-		// Verificar si el estudiante ya ha sido registrado para la fecha actual
-		if (isStudentRegistered(studentId)) {
-			System.out.println("Este estudiante ya ha sido registrado hoy.");
-			return;
-		}
+		 // Verificar si el estudiante ya ha sido registrado para la fecha actual
+        if (isStudentRegistered(studentId)) {
+            System.out.println("Este estudiante ya ha sido registrado hoy.");
+            return true; // Indicar que el estudiante está registrado
+        }
 
-		// Guardar los datos en la base de datos
-		saveAttendanceData(studentId, attendanceStatus, attendanceOcurrencia);
+        // Guardar los datos en la base de datos
+        saveAttendanceData(studentId, attendanceStatus, attendanceOcurrencia);
 
-		System.out.println("Datos de asistencia guardados exitosamente.");
+        System.out.println("Datos de asistencia guardados exitosamente.");
+        return false; // Indicar que el estudiante no estaba registrado previamente
 	}
 
 	private  boolean isStudentRegistered(int studentId) {

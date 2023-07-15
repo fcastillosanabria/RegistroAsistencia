@@ -51,7 +51,6 @@ html, body {
 /* 	justify-content: center; */
 /* 	align-items: center; */
 /* } */
-
 .video-container {
 	width: 100%;
 	height: 100%;
@@ -254,100 +253,136 @@ html, body {
 					</div>
 				</div>
 
-				<div class="video-container flex-grow-1" style="background-image: linear-gradient(90deg, rgba(220,53,69,1) 7%, rgba(255,165,0,1) 44%, rgba(255,255,255,1) 100%);">
+				<div class="video-container flex-grow-1"
+					style="background-image: linear-gradient(90deg, rgba(220, 53, 69, 1) 7%, rgba(255, 165, 0, 1) 44%, rgba(255, 255, 255, 1) 100%);">
 					<div style="position: relative;">
 						<video id="videoElement" autoplay style="position: relative;"></video>
-						<canvas id="qrCanvas" style="position: absolute; top: -40%; left: -19%; width: 139%; height: 180%;"></canvas>
+						<canvas id="qrCanvas"
+							style="position: absolute; top: -40%; left: -19%; width: 139%; height: 180%;"></canvas>
 						<div id="qrDataOverlay"
-							style="position: absolute; top: -36%; left: -18%; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;"></div>
-							
-												<button style="position: absolute; top: -20%; left: -18%; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;" type="button" class="btn btn-danger"
-										onclick="volverAlRegistro()">Volver atras</button>
-									<script>
-										function volverAlRegistro() {
-											// Redireccionar a la página deseada
-											window.location.href = "RegistrarAsistenciaResultados.jsp";
-										}
-									</script>
+							style="position: absolute; top: 10px; left: 10px; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;"></div>
+						<button
+							style="position: absolute; top: -20%; left: -18%; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;"
+							type="button" class="btn btn-danger" onclick="volverAlRegistro()">Volver
+							atrás</button>
 					</div>
 				</div>
 
 				<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 				<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const video = document.getElementById('videoElement');
-        const qrCanvas = document.getElementById('qrCanvas');
-        const qrDataOverlay = document.getElementById('qrDataOverlay');
-        const form = document.getElementById('form');
-        const qrCodeInput = document.getElementById('qrCodeInput');
+document.addEventListener("DOMContentLoaded", function() {
+    const video = document.getElementById('videoElement');
+    const qrCanvas = document.getElementById('qrCanvas');
+    const qrDataOverlay = document.getElementById('qrDataOverlay');
+    const form = document.getElementById('form');
+    const qrCodeInput = document.getElementById('qrCodeInput');
 
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    processVideo();
-                })
-                .catch(function(error) {
-                    console.log("Error al acceder a la cámara: " + error);
-                });
-        }
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                video.srcObject = stream;
+                processVideo();
+            })
+            .catch(function(error) {
+                console.log("Error al acceder a la cámara: " + error);
+            });
+    }
 
-        function processVideo() {
-            const canvas = qrCanvas;
-            const context = canvas.getContext('2d');
+    function processVideo() {
+        const canvas = qrCanvas;
+        const context = canvas.getContext('2d');
 
-            setInterval(function() {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                const code = jsQR(imageData.data, canvas.width, canvas.height);
+        setInterval(function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, canvas.width, canvas.height);
 
-                if (code) {
-                    console.log("Código QR detectado: " + code.data);
-                    qrDataOverlay.textContent = "Código QR detectado: " + code.data;
+            if (code) {
+                console.log("Código QR detectado: " + code.data);
+//                 qrDataOverlay.textContent = "Código QR detectado: " + code.data;
 
-                    // Validar el código QR antes de enviarlo al controlador
-                    if (validateQRCode(code.data)) {
-                        // Actualizar el valor del campo oculto con el código QR detectado
-                        qrCodeInput.value = code.data;
+                // Validar el código QR antes de enviarlo al controlador
+                if (validateQRCode(code.data)) {
+                    // Actualizar el valor del campo oculto con el código QR detectado
+                    qrCodeInput.value = code.data;
 
-                        // Enviar el formulario al controlador
-                        form.submit();
-                    } else {
-                        // Mostrar un mensaje de QR inválido en tiempo real
-                        qrDataOverlay.textContent = "Codigo QR inválido, muestre el codigo QR institucional, gracias";
-                    }
-
-                    // Dibujar el cuadrado verde alrededor del código QR
-                    drawQRCodeRect(code.location, canvas);
+                    // Enviar el formulario al controlador utilizando AJAX
+                    sendFormToController();
                 } else {
-                    qrDataOverlay.textContent = "";
+                    // Mostrar un mensaje de QR inválido en tiempo real
+                    qrDataOverlay.textContent = "Codigo QR inválido, muestre el codigo QR institucional, gracias";
                 }
-            }, 100);
-        }
 
-        function validateQRCode(qrCode) {
-            // Validar la estructura del código QR
-            const qrData = qrCode.split(", ");
-            return qrData.length === 3;
-        }
+                // Dibujar el cuadrado verde alrededor del código QR
+                drawQRCodeRect(code.location, canvas);
+            } else {
+                qrDataOverlay.textContent = "";
+            }
+        }, 100);
+    }
 
-        function drawQRCodeRect(location, canvas) {
-            const context = canvas.getContext('2d');
-            context.strokeStyle = 'red';
-            context.lineWidth = 8;
-            context.beginPath();
-            context.moveTo(location.topLeftCorner.x, location.topLeftCorner.y);
-            context.lineTo(location.topRightCorner.x, location.topRightCorner.y);
-            context.lineTo(location.bottomRightCorner.x, location.bottomRightCorner.y);
-            context.lineTo(location.bottomLeftCorner.x, location.bottomLeftCorner.y);
-            context.lineTo(location.topLeftCorner.x, location.topLeftCorner.y);
-            context.stroke();
-            context.closePath();
+    function validateQRCode(qrCode) {
+        // Validar la estructura del código QR
+        const qrData = qrCode.split(", ");
+        return qrData.length === 3;
+    }
+
+    function drawQRCodeRect(location, canvas) {
+        const context = canvas.getContext('2d');
+        context.strokeStyle = 'red';
+        context.lineWidth = 8;
+        context.beginPath();
+        context.moveTo(location.topLeftCorner.x, location.topLeftCorner.y);
+        context.lineTo(location.topRightCorner.x, location.topRightCorner.y);
+        context.lineTo(location.bottomRightCorner.x, location.bottomRightCorner.y);
+        context.lineTo(location.bottomLeftCorner.x, location.bottomLeftCorner.y);
+        context.lineTo(location.topLeftCorner.x, location.topLeftCorner.y);
+        context.stroke();
+        context.closePath();
+    }
+
+    function sendFormToController() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "ControladorQR", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    handleResponse(xhr.responseText);
+                } else {
+                    console.log("Error al enviar el formulario al controlador");
+                }
+            }
+        };
+        const formData = new FormData(form);
+        xhr.send(new URLSearchParams(formData).toString());
+    }
+
+    function handleResponse(response) {
+        const jsonResponse = JSON.parse(response);
+        if (jsonResponse.success) {
+            qrDataOverlay.textContent = jsonResponse.message;
+            qrDataOverlay.style.backgroundColor = "green";
+        } else {
+            qrDataOverlay.textContent = jsonResponse.message;
+            qrDataOverlay.style.backgroundColor = "red";
         }
-    });
+        setTimeout(function() {
+            qrDataOverlay.textContent = "";
+            qrDataOverlay.style.backgroundColor = "red";
+        }, 5000); // Ocultar el mensaje después de 5 segundos
+    }
+});
+
+function volverAlRegistro() {
+    // Redireccionar a la página deseada
+    window.location.href = "RegistrarAsistenciaResultados.jsp";
+}
+
 </script>
+
 
 				<!-- Formulario para enviar los datos al controlador -->
 				<form id="form" action="ControladorQR" method="POST">

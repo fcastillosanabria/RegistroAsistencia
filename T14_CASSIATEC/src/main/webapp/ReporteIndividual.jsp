@@ -322,7 +322,7 @@ th.table-header {
 									<tbody>
 										<c:forEach var="attendance" items="${reporte}">
 											<tr>
-												<td>${attendance.attendanceDateTime}</td>
+												<td>${attendance.attendanceDateTimeDB}</td>
 												<td>${attendance.attendanceStatusDB}</td>
 												<td>${attendance.attendance_ocurrencia}</td>
 											</tr>
