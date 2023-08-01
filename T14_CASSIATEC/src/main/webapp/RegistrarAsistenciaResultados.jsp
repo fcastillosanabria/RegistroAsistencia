@@ -38,7 +38,7 @@ html, body {
 }
 
 .table-container {
-	max-height: 300px; /* ajusta la altura máxima según tus necesidades */
+	max-height: 520px; /* ajusta la altura máxima según tus necesidades */
 	overflow-y: scroll;
 }
 
@@ -402,57 +402,62 @@ td.table-cell {
 					<!-- action="Controlador2" method="POST" -->
 					<form action="Controlador2" method="POST">
 						<div class="contenido">
-							<table class="table table-bordered" id="tablaPerson">
-								<thead>
-									<tr>
-										<th class="table-header">N° DOC</th>
-										<th class="table-header">APELLIDO, NOMBRES</th>
-										<th class="table-header">Fecha: <%=day + "/" + month + "/" + year%></th>
-										<th class="table-header">Ocurrencia</th>
-										<th class="table-header">Reporte</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="student" items="${students}">
+							<div class="table-container">
+								<table class="table table-bordered" id="tablaPerson">
+									<thead>
 										<tr>
-											<td class="table-cell">${student.getDocument_number()}</td>
-											<td class="table-cell">${student.getLast_names()},
-												${student.getNames()}</td>
-											<td class="table-cell"><select class="form-control"
-												name="attendanceStatus_${student.getId()}"
-												id="attendanceStatus_${student.getId()}">
-													<option value="" disabled selected>Elegir
-														asistencia</option>
-													<option value="A">Asistió</option>
-													<option value="F">Faltó</option>
-													<option value="J">Justificó</option>
-											</select></td>
-											<td class="table-cell"><input type="text"
-												class="form-control"
-												name="attendanceOcurrencia_${student.getId()}"
-												id="attendanceOcurrencia_${student.getId()}"
-												placeholder="Escribe la ocurrencia"></td>
-
-
-											<td class="table-cell">
-												<form action="Controlador2" method="POST">
-													<input type="hidden" name="studentId"
-														value="${student.getId()}" /> <input type="hidden"
-														name="studentDocument"
-														value="${student.getDocument_number()}"> <input
-														type="hidden" name="studentLastNames"
-														value="${student.getLast_names()}"> <input
-														type="hidden" name="studentNames"
-														value="${student.getNames()}">
-
-													<button type="submit" class="btn btn-warning" name="accion"
-														value="GenerarReporte">Generar Reporte</button>
-												</form>
-											</td>
+											<th class="table-header">ID</th>
+											<th class="table-header">N° DOC</th>
+											<th class="table-header">APELLIDO, NOMBRES</th>
+											<th class="table-header">Fecha: <%=day + "/" + month + "/" + year%></th>
+											<th class="table-header">Ocurrencia</th>
+											<th class="table-header">Reporte</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+									</thead>
+									<tbody>
+										<c:forEach var="student" items="${students}">
+											<tr>
+												<td class="table-cell">${student.getId()}</td>
+												<td class="table-cell">${student.getDocument_number()}</td>
+												<td class="table-cell">${student.getLast_names()},
+													${student.getNames()}</td>
+												<td class="table-cell"><select class="form-control"
+													name="attendanceStatus_${student.getId()}"
+													id="attendanceStatus_${student.getId()}">
+														<option value="" disabled selected>Elegir
+															asistencia</option>
+														<option value="A">Asistió</option>
+														<option value="F">Faltó</option>
+														<option value="J">Justificó</option>
+												</select></td>
+												<td class="table-cell"><input type="text"
+													class="form-control"
+													name="attendanceOcurrencia_${student.getId()}"
+													id="attendanceOcurrencia_${student.getId()}"
+													placeholder="Escribe la ocurrencia"></td>
+
+
+												<td class="table-cell">
+													<form action="Controlador2" method="POST">
+														<input type="hidden" name="studentId"
+															value="${student.getId()}" /> <input type="hidden"
+															name="studentDocument"
+															value="${student.getDocument_number()}"> <input
+															type="hidden" name="studentLastNames"
+															value="${student.getLast_names()}"> <input
+															type="hidden" name="studentNames"
+															value="${student.getNames()}">
+
+														<button type="submit" class="btn btn-warning"
+															name="accion" value="GenerarReporte">Generar
+															Reporte</button>
+													</form>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
 						<input type="submit" class="btn btn-info w-25" name="accion"
 							value="GuardarAsistencia">

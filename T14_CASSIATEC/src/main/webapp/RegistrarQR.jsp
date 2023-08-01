@@ -73,6 +73,13 @@ html, body {
 </style>
 <body>
 
+<div id="alertWrapper" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert" style="top: 9%; left: 50%; transform: translate(-50%, -50%);">
+            <h1 class="alert-heading justify-content">Asistencia guardada</h1>
+            <p><h3>Asistencia guardada exitosamente</h3></p>
+            <h1><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></h1>
+        </div>
+    </div>
 
 
 	<div class="container-fluid">
@@ -262,11 +269,28 @@ html, body {
 						<div id="qrDataOverlay"
 							style="position: absolute; top: 10px; left: 10px; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;"></div>
 						<button
-							style="position: absolute; top: -20%; left: -18%; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;"
+							style="position: absolute; top: -36%; left: -18%; background-color: red; color: white; padding: 10px; border: 2px solid black; z-index: 1;"
 							type="button" class="btn btn-danger" onclick="volverAlRegistro()">Volver
 							atrás</button>
 					</div>
 				</div>
+
+
+				<!-- Toast para la notificación para asistencia primera vez del dia -->
+<!-- 				<div class="toast" id="successToast" role="alert" -->
+<!-- 					aria-live="assertive" aria-atomic="true" -->
+<!-- 					style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;"> -->
+<!-- 					<div class="toast-header"> -->
+<!-- 						<strong class="mr-auto">Asistencia guardada</strong> -->
+<!-- 						<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" -->
+<!-- 							aria-label="Close"> -->
+<!-- 							<span aria-hidden="true">&times;</span> -->
+<!-- 						</button> -->
+<!-- 					</div> -->
+<!-- 					<div class="toast-body">Asistencia guardada exitosamente</div> -->
+<!-- 				</div> -->
+
+
 
 				<script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 				<script>
@@ -365,9 +389,29 @@ document.addEventListener("DOMContentLoaded", function() {
         if (jsonResponse.success) {
             qrDataOverlay.textContent = jsonResponse.message;
             qrDataOverlay.style.backgroundColor = "green";
+			console.log("Asistencia guardada exitosamente");
+            
+         	// Mostrar la notificación de asistencia guardada exitosamente
+            //const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+            //successToast.show();
+
+            // Ocultar la notificación después de 6 segundos
+            //setTimeout(function() {
+            //    successToast.hide();
+            //}, 6000);
+			const alertWrapper = document.getElementById('alertWrapper');
+            alertWrapper.style.display = 'block';
+            
+         	// Ocultar la notificación después de 6 segundos
+            setTimeout(function () {
+      		alertWrapper.style.display = 'none';
+    		}, 6000); // Ocultar el alert después de 6 segundos (6000 milisegundos)
+            
         } else {
             qrDataOverlay.textContent = jsonResponse.message;
             qrDataOverlay.style.backgroundColor = "red";
+            console.log("Este estudiante ya ha sido registrado hoy");
+            
         }
         setTimeout(function() {
             qrDataOverlay.textContent = "";
