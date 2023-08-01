@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="100x100"
 	href="img\Insignia SRC.png">
 
-<title>Home</title>
+<title>Reporte individual</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -232,17 +232,43 @@ th.table-header {
 				</div>
 
 				<div class="p-0">
+					<div class="row">
+						<div class="col-6 mb-3">
+							<div>
+								<h1>Reporte Individual</h1>
+								<form action="Controlador2" method="POST">
+									<input type="submit" class="btn btn-success w-25" name="accion"
+										value="BuscarOtraAula"> <input type="hidden"
+										name="studentId" value="${studentIdParam}">
+								</form>
 
-					<h1>Reporte Individual</h1>
-					<form action="Controlador2" method="POST">
-						<input type="submit" class="btn btn-success w-25" name="accion"
-							value="BuscarOtraAula"> <input type="hidden"
-							name="studentId" value="${studentIdParam}">
-					</form>
+								<!-- Button modal Exportacion -->
+								<button class="btn btn-danger" data-bs-toggle="modal"
+									data-bs-target="#exportModal">Exportar</button>
+							</div>
+						</div>
 
-					<!-- Button modal Exportacion -->
-					<button class="btn btn-danger" data-bs-toggle="modal"
-						data-bs-target="#exportModal">Exportar</button>
+						<div class="col-6 mb-3">
+							<h2>Filtrar por fecha</h2>
+							<div class="row">
+								<div class="col-6 mb-3">
+									<h5>Fecha de inicio</h5>
+									<input type="date" class="form-control" name="txtBirthdate"
+										id="txtBirthdate" required>
+								</div>
+
+								<div class="col-6 mb-3">
+									<h5>Fecha de termino</h5>
+									<input type="date" class="form-control" name="txtBirthdate"
+										id="txtBirthdate" required>
+								</div>
+							</div>
+
+							<button class="btn btn-success">Filtrar</button>
+
+						</div>
+					</div>
+
 
 					<!-- Modal de Exportación -->
 					<div class="modal fade" id="exportModal" tabindex="-1"
