@@ -34,6 +34,7 @@ CREATE TABLE ubigeo (
     district varchar(70)  NOT NULL,
     CONSTRAINT ubigeo_pk PRIMARY KEY  (code)
 );
+GO
 
 -- insertar ubigeo
 insert into ubigeo 
@@ -55,6 +56,7 @@ CREATE TABLE login (
     id_auxiliary int  NOT NULL,
     CONSTRAINT login_pk PRIMARY KEY  (id_login)
 );
+GO
 
 
 -- MAESTRO1 person
@@ -75,6 +77,7 @@ CREATE TABLE person (
 	code_ubigeo char(6)  NOT NULL,
 	CONSTRAINT person_pk PRIMARY KEY  (id)
 );
+GO
 
 -- insertar person
 INSERT INTO person
@@ -91,6 +94,7 @@ VALUES
 ('DNI', '15489632', 'D', 'A', 'T', 'M', 'Luis', 'Morales', '1996-03-07', 'luismorales@gmail.com', '977432189', '010104'),
 ('DNI', '15236587', 'A', 'A', 'D', 'M', 'Peter', 'Parker', '1996-03-07', 'hombrearaña@gmail.com', '962225487', '010104');
 GO
+
 
 
 -- MAESTRO2 student
@@ -112,6 +116,7 @@ CREATE TABLE student (
 	code_ubigeo char(6)  NOT NULL,
     CONSTRAINT student_pk PRIMARY KEY (id)
 );
+GO
 
 -- insertar student
 INSERT INTO student
@@ -123,42 +128,57 @@ VALUES
 ('DNI', '52587486', 'S', 'A', 'DIA', 'Mayumi', 'Castro Herrera', '01/11/2008', 'A' , '5', 'MayumiCV@hotmail.com', '995684582', '010101'),
 ('DNI', '15966235', 'S', 'A', 'DIA', 'Fatima', 'Guando Castro', '26/11/2008', 'A' , '5', 'fatimaG@hotmail.com', '999562314', '010101'),
 ('DNI', '55569848', 'S', 'A', 'DIA', 'Maria', 'Del Rosario', '09/09/2009', 'A' , '4', 'maria8794@gmail.com', '999645845', '010104'),
+('DNI', '55569048', 'S', 'A', 'DIA', 'Luzia', 'Mendieta Cardena', '09/09/2009', 'A' , '1', 'luzia8794@gmail.com', '999640000', '010104'),
+('DNI', '78901234', 'S', 'A', 'DIA', 'Isabel', 'Sanchez', '2009-01-14', 'A', '2', 'isabel@gmail.com', '789012345', '010101'),
+('DNI', '89012345', 'S', 'A', 'DIA', 'Elena', 'Torres', '2008-12-30', 'A', '3', 'elena@gmail.com', '890123456', '010101'),
+('DNI', '90123456', 'S', 'A', 'DIA', 'Fernanda', 'Mendez', '2009-11-03', 'A', '4', 'fernanda@gmail.com', '901234567', '010101'),
+('DNI', '01234567', 'S', 'A', 'DIA', 'Victoria', 'Rojas', '2010-05-09', 'A', '5', 'victoria@gmail.com', '012345678', '010101'),
+('DNI', '09876543', 'S', 'A', 'DIA', 'Gabriela', 'Cruz', '2009-07-22', 'A', '1', 'gabriela@gmail.com', '098765432', '010101'),
+('DNI', '23456789', 'S', 'A', 'DIA', 'Valentina', 'Alvarez', '2010-06-10', 'A', '2', 'valentina88@gmail.com', '234567890', '010101'),
+('DNI', '34567890', 'S', 'A', 'DIA', 'Camila', 'Mendoza', '2009-08-25', 'A', '3', 'cami@gmail.com', '345678901', '010101'),
+('DNI', '45678901', 'S', 'A', 'DIA', 'Luciana', 'Lopez', '2010-04-05', 'A', '4', 'luciana@gmail.com', '456789012', '010101'),
+('DNI', '56789012', 'S', 'A', 'DIA', 'Diana', 'Perez', '2009-10-15', 'A', '5', 'diANArar@gmail.com', '567890123', '010101'),
+('DNI', '86123456', 'S', 'A', 'DIA', 'Daniela', 'Fuentes', '2010-09-20', 'A', 2, 'daniela@gmail.com', '861234567', '010101'),
+('DNI', '77012345', 'S', 'A', 'DIA', 'Valeria', 'Ortega', '2009-06-11', 'A', 3, 'valeria@gmail.com', '770123456', '010101'),
+('DNI', '68123456', 'S', 'A', 'DIA', 'Renata', 'Garcia', '2010-02-25', 'A', 4, 'renata@gmail.com', '681234567', '010101'),
+('DNI', '59123456', 'S', 'A', 'DIA', 'Florencia', 'Paz', '2009-11-17', 'A', 5, 'florencia@gmail.com', '591234567', '010101'),
+('DNI', '50123456', 'S', 'A', 'DIA', 'Mia', 'Jimenez', '2010-08-30', 'A', 1, 'miacastro@gmail.com', '501234567', '010101'),
+('DNI', '41123456', 'S', 'A', 'DIA', 'Antonella', 'Silva', '2009-05-12', 'A', 2, 'antonella75257@gmail.com', '411234567', '010101'),
+('DNI', '32123456', 'S', 'A', 'DIA', 'Bianca', 'Cruz', '2010-01-05', 'A', 3, 'bianca8282@gmail.com', '321234567', '010101'),
+('DNI', '23123456', 'S', 'A', 'DIA', 'Lola', 'Marquez', '2009-10-27', 'A', 4, 'lolaXD@gmail.com', '231234567', '010101'),
+('DNI', '14123456', 'S', 'A', 'DIA', 'Penelope', 'Valdez', '2010-07-09', 'A', 5, 'penelo@gmail.com', '141234567', '010101'),
+('DNI', '95123645', 'S', 'A', 'TARDE', 'Isabella', 'Rojas', '2008-04-05', 'A', 3, 'isabella@hotmail.com', '951236459', '010104'),
+('DNI', '86123454', 'S', 'A', 'TARDE', 'Valentina', 'Sanchez', '2009-09-15', 'A', 1, 'valentina87578@hotmail.com', '861234549', '010104'),
+('DNI', '77012343', 'S', 'A', 'TARDE', 'Camila', 'Mendoza', '2008-12-20', 'A', 4, 'camilacabello@hotmail.com', '770123439', '010104'),
+('DNI', '68123452', 'S', 'A', 'TARDE', 'Luciana', 'Perez', '2009-11-02', 'A', 2, 'lucianaxd@hotmail.com', '681234529', '010104'),
+('DNI', '59123454', 'S', 'A', 'TARDE', 'Diana', 'Gutierrez', '2008-10-10', 'A', 5, 'dianaEXE@hotmail.com', '591234549', '010104'),
+('DNI', '50123454', 'S', 'A', 'TARDE', 'Mia', 'Fuentes', '2009-07-25', 'A', 3, 'mia75@hotmail.com', '501234549', '010104'),
+('DNI', '41123458', 'S', 'A', 'TARDE', 'Antonella', 'Ortega', '2010-05-19', 'A', 1, 'antonella58@hotmail.com', '411234589', '010104'),
+('DNI', '56891234', 'S', 'A', 'TARDE', 'Luciana', 'Paz', '2009-11-26', 'A', 4, 'lucianaJAJ@gmail.com', '568912345', '010104'),
+('DNI', '48796321', 'S', 'A', 'TARDE', 'Diana', 'Jimenez', '2009-10-18', 'A', 5, 'dianaHELLOWORLD@gmail.com', '487963215', '010104'),
+('DNI', '39698547', 'S', 'A', 'TARDE', 'Mia', 'Silva', '2009-07-30', 'A', 1, 'mia785@gmail.com', '396985478', '010104'),
+('DNI', '48796325', 'S', 'A', 'TARDE', 'Antonella', 'Cruz', '2010-05-05', 'A', 2, 'antonella785@gmail.com', '487963256', '010104'),
+('DNI', '69854712', 'S', 'A', 'TARDE', 'Bianca', 'Marquez', '2009-09-27', 'A', 3, 'bianca496@gmail.com', '698547123', '010104'),
+('DNI', '85963214', 'S', 'A', 'TARDE', 'Lola', 'Valdez', '2010-02-09', 'A', 4, 'lola8484@gmail.com', '859632145', '010104'),
+('DNI', '89632147', 'S', 'A', 'TARDE', 'Penelope', 'Gutierrez', '2009-11-10', 'A', 5, 'lope@gmail.com', '896321478', '010104'),
+('DNI', '74569321', 'S', 'A', 'TARDE', 'Olivia', 'Fuentes', '2010-08-25', 'A', 3, 'olivia8282@gmail.com', '745693215', '010104'),
+('DNI', '98654713', 'S', 'A', 'TARDE', 'Sofia', 'Ortega', '2008-06-15', 'A', 1, 'sofiacaca@gmail.com', '986547139', '010104'),
+('DNI', '25698741', 'S', 'A', 'TARDE', 'Valentina', 'Paz', '2009-04-20', 'A', 2, 'Vtina@gmail.com', '256987415', '010104'),
+('DNI', '98741562', 'S', 'A', 'TARDE', 'Camila', 'Jimenez', '2010-01-03', 'A', 3, 'camila541@gmail.com', '987415628', '010104'),
+('DNI', '74215896', 'S', 'A', 'TARDE', 'Luciana', 'Silva', '2009-10-22', 'A', 4, 'luciana516651159@gmail.com', '742158965', '010104'),
+('DNI', '96587412', 'S', 'A', 'TARDE', 'Diana', 'Marquez', '2010-07-05', 'A', 5, 'diana@gmail.com', '965874129', '010104'),
+('DNI', '75369841', 'S', 'A', 'TARDE', 'Mia', 'Valdez', '2009-03-10', 'A', 1, 'mia888@gmail.com', '753698415', '010104'),
+('DNI', '87412365', 'S', 'A', 'TARDE', 'Antonella', 'Gutierrez', '2010-09-12', 'A', 2, 'anto@gmail.com', '874123658', '010104'),
+('DNI', '36587412', 'S', 'A', 'TARDE', 'Bianca', 'Fuentes', '2009-06-25', 'A', 3, 'biancaholamunda@gmail.com', '365874129', '010104'),
+('DNI', '58741236', 'S', 'A', 'TARDE', 'Lola', 'Ortega', '2010-02-09', 'A', 4, 'lolavaca@gmail.com', '587412369', '010104'),
+('DNI', '96321475', 'S', 'A', 'TARDE', 'Penelope', 'Paz', '2009-11-10', 'A', 5, 'pen@gmail.com', '954213658', '010104'),
+('DNI', '36547812', 'S', 'A', 'TARDE', 'Olivia', 'Gutierrez', '2009-07-25', 'A', 1, 'olivia2828@gmail.com', '365478125', '010104'),
+('DNI', '58741239', 'S', 'A', 'TARDE', 'Sofia', 'Fuentes', '2010-05-05', 'A', 2, 'sofiaccccc@gmail.com', '587412395', '010104'),
+('DNI', '21475369', 'S', 'A', 'TARDE', 'Valentina', 'Ortega', '2008-09-27', 'A', 3, 'val@gmail.com', '214753698', '010104'),
+('DNI', '96321422', 'S', 'A', 'TARDE', 'Camila', 'Paz', '2010-02-09', 'A', 4, 'camila987777@gmail.com', '954000015', '010104'),
 ('CNE', '546897569522215', 'S', 'A', 'TARDE', 'Ana Luz', 'Castillo', '12/12/2008', 'A' , '3', 'anadelluz@gmail.com', '945612345', '010104');
 GO
 
-
--- Crear tabla aula
-/*CREATE TABLE aula (
-  idaula int PRIMARY KEY,
-  descripcion varchar(50)
-);
-go
-
--- Crear tabla ocurrencia
-CREATE TABLE ocurrencia (
-  idocurrencia int PRIMARY KEY,
-  descripcion varchar(50)
-);
-go
-
--- Crear tabla asistencia
-CREATE TABLE asistencia (
-  id int,
-  fecha DATE,
-  idocurrencia int,
-  detalle varchar(50),
-  PRIMARY KEY (fecha, id),
-  FOREIGN KEY (id) REFERENCES student(id),
-  FOREIGN KEY (idocurrencia) REFERENCES ocurrencia(idocurrencia)
-);
-go
-
--- Insertar datos en la tabla ocurrencia
-INSERT INTO ocurrencia VALUES
-  (1, 'PRESENTE'),
-  (2, 'TARDE'),
-  (3, 'JUSTIFICADO');
-  go*/
 
 -- Table: registro_asistencia
 CREATE TABLE registro_asistencia (
@@ -170,11 +190,11 @@ CREATE TABLE registro_asistencia (
     CONSTRAINT registro_asistencia_pk PRIMARY KEY  (id_attendance)
 );
 GO
--- Insertar dos registros en un solo código
+-- Insertar tres registros en un solo código
 INSERT INTO registro_asistencia (id_estudent, attendance_status, attendance_ocurrencia)
 VALUES
   (1, 'A', ''),
-  (2, 'F', 'Falto porque comio tarde :V'),
+  (4, 'F', 'Falto porque comio tarde :V'),
   (3, 'F', '');
 GO
 
@@ -199,7 +219,7 @@ ALTER TABLE login ADD CONSTRAINT LOGIN_DOCENTE
 ALTER TABLE login ADD CONSTRAINT LOGIN_ESTUDIANTE
     FOREIGN KEY (id_student)
     REFERENCES student (id);
-go
+
 
 -- Reference: REGISTRO_ASISTENCIA_DOCENTE (table: registro_asistencia)
 /*ALTER TABLE registro_asistencia ADD CONSTRAINT REGISTRO_ASISTENCIA_DOCENTE
@@ -212,7 +232,9 @@ ALTER TABLE registro_asistencia ADD CONSTRAINT REGISTRO_ASISTENCIA_ESTUDIANTE
     REFERENCES student (id);
 GO
 
+----------------------------------------------------
 --Vista Person
+----------------------------------------------------
 CREATE VIEW listado_person AS 
 SELECT 
 	id AS 'ID',
@@ -252,38 +274,36 @@ GO
 SELECT * FROM listado_person;
 GO
 
+----------------------------------------------------
+--Vista Asistencia
+----------------------------------------------------
+CREATE VIEW listado_asistencia AS
+SELECT 
+	ra.id_attendance AS 'ID ASISTENCIA', 
+	s.document_number AS 'NUMERO DE DOCUMENTO', 
+	CONCAT(s.last_names, ', ', s.names) AS 'ESTUDIANTE', 
+	s.grade AS 'GRADO', 
+	s.section AS 'SECCION', 
+	s.turn AS 'TURNO', 
+	ra.attendance_datetime AS 'FECHA DE REGISTRO', 
+	CASE 
+		WHEN ra.attendance_status = 'A' THEN 'ASISTIO' 
+		WHEN ra.attendance_status = 'F' THEN 'FALTO' 
+		WHEN ra.attendance_status = 'J' THEN 'JUSTIFICO' 
+	END AS 'ESTADO DE LA ASISTENCIA', 
+	ra.attendance_ocurrencia AS 'OCURRENCIA'
+	FROM registro_asistencia ra
+JOIN student s ON ra.id_estudent = s.id;
+GO
+
+SELECT * FROM listado_asistencia;
+GO
+
+
 -- End of file.
-
-
---Ejemplo para ver mejor las tablas
-/*
-CREATE VIEW listado_personas AS 
-select 
-	id as 'ID',
-	number_dni as 'DNI',
-	CONCAT(UPPER(last_name), ', ', names) AS 'PERSONA',
-	cell_phone as 'CELULAR',
-	email as 'EMAIL',
-	FORMAT(birthday, 'dd - MMM - yyyy') AS 'FEC. NACIMIENTO',
-    CASE 
-    WHEN type_person = 'V' THEN 'Vendedor' 
-    WHEN type_person = 'C' THEN 'Cliente'
-	WHEN type_person = 'J' THEN 'Jefe'
-    END AS 'Tipo'
-from persons;
-GO
-
-select * from listado_personas;
-GO
-*/
 
 -- mostrar las tablas con las insersiones
 select * from person;
 select * from student;
 select * from registro_asistencia;
 GO
-
-/*SELECT ra.id_attendance, s.document_number, s.last_names, s.names, s.grade, s.section, s.turn, ra.attendance_datetime, ra.attendance_status
-FROM registro_asistencia ra
-JOIN student s ON ra.id_estudent = s.id;
-GO*/
