@@ -22,9 +22,13 @@
 </head>
 
 <style>
+*{
+    transition:all .5s linear;
+}
+
 html, body {
-	height: 100%;
-	overflow: hidden;
+    margin: 0;
+    height: 100%;
 }
 
 .nav-pills li a:hover {
@@ -43,27 +47,96 @@ html, body {
   0% {
     transform: translateX(0);
   }
+
   50% {
     transform: translateX(-20px);
   }
+
   100% {
     transform: translateX(0);
   }
 }
 
 .animated-img {
-  animation: move 2s infinite;
+	animation: move 2s infinite;
+}
+
+/* Estilo para hacer el <hr> más grueso */
+.thicker-hr {
+	border: 3px solid black; /* Ajusta el valor del grosor aquí */
+}
+
+/* Ocultar el div de dashboard en pantallas pequeñas y medianas */
+@media ( max-width : 990px) {
+	.hide-on-sm-md {
+		display: none !important;
+	}
+}
+
+/* Estilos para el botón de hamburguesa */
+.hamburger-button {
+	display: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.hamburger-line {
+	display: block;
+	width: 25px;
+	height: 3px;
+	margin: 4px auto;
+	background-color: white;
+	transition: 0.4s;
+}
+
+/* Mostrar el botón de hamburguesa en pantallas pequeñas y medianas */
+@media ( max-width : 990px) {
+	.hamburger-button {
+		display: block;
+	}
+}
+
+/* Establecer el ancho en 75% con !important */
+.offcanvas {
+	width: 90% !important;
+}
+
+.animated-button {
+	position: relative;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+}
+
+.animated-button img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(1.7);
+  }
 }
 </style>
 <body>
 
-<jsp:include page="Promocion.jsp"></jsp:include>
+	<%-- <jsp:include page="Promocion.jsp"></jsp:include> --%>
 
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<div
-				class="bg-danger col-auto col-md-4 col-lg-2 min-vh-100 d-flex align-items-center">
-				<div class="bg-danger p-2 align-items-center">
+			<!-- Div que se oculta en pantallas pequeñas y medianas -->
+			<div id="menuContent"
+				class="bg-danger col-auto col-md-4 col-lg-2 min-vh-100 d-flex align-items-center hide-on-sm-md">
+				<div class="bg-danger  p-2">
 					<a href="HOME.jsp"
 						class="d-flex text-decoration-none mt-1 align-items-center justify-content-center text-white">
 						<img src="img\Insignia SRC.png" alt="Logo CASSIATEC"
@@ -80,7 +153,8 @@ html, body {
 								class="fs-4 ms-3 d-none d-sm-inline">ACTUALIZAR MIS DATOS</span>
 						</a></li>
 						<li class="nav-item py-2 py-sm-0 align-items-center"><a
-							href="RegistrarAsistencia.jsp" class="nav-link text-white text-center"> <span
+							href="RegistrarAsistencia.jsp"
+							class="nav-link text-white text-center"> <span
 								class="fs-4 ms-3 d-none d-sm-inline">REGISTRAR ASISTENCIA</span>
 						</a></li>
 						<li class="nav-item py-2 py-sm-0 align-items-center"><a
@@ -97,47 +171,91 @@ html, body {
 							class="nav-link text-white text-center"> <span
 								class="fs-4 ms-3 d-none d-sm-inline">ACTUALIZAR
 									ESTUDIANTE</span>
+
 						</a></li>
 					</ul>
+
+					<hr class="thicker-hr">
+					<div class="dropdown">
+						<a href="#"
+							class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+							id="dropdownUser1" data-bs-toggle="dropdown"
+							aria-expanded="false"> <img src="img/iconoUSUARIO.png" alt=""
+							width="32" height="32" class="rounded-circle me-2"> <strong>Cerrar
+								sesión</strong>
+						</a>
+						<ul
+							class="dropdown-menu dropdown-menu-dark text-small shadow bg-dark"
+							aria-labelledby="dropdownUser1" style="">
+							<li><a class="dropdown-item" href="#">New project...</a></li>
+							<li><a class="dropdown-item" href="#">Ajustes</a></li>
+							<li><a class="dropdown-item" href="#">Perfil</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-bs-toggle="modal"
+								data-bs-target="#confirmLogoutModal">Cerra sesión</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
-			<div class="col p-0">
+			<!-- Modal Cerra sesión -->
+			<div class="modal fade" id="confirmLogoutModal" tabindex="-1"
+				aria-labelledby="confirmLogoutModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="confirmLogoutModalLabel">Confirmar
+								cierre de sesión</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="text-center mx-auto">
+								<img src="img\cerrarSESION.png" alt="Logo CASSIATEC"
+									class="logo-img" style="height: 6rem">
+								<H4>
+									<span>¿Desea cerrar <br>sesion?
+									</span>
+								</H4>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="text-center mx-auto">
+								<button type="button" class="btn btn-danger"
+									onclick="cerrarSesion()">Cerrar sesión</button>
+								<script>
+									function cerrarSesion() {
+										// Redireccionar a la página de inicio de sesión
+										window.location.href = "index.jsp";
+									}
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Codigo para mostrar el dashboard en veersion movil
+(cuando las patallas son mediasnas o pequeñas) -->
+			<jsp:include page="dashboardMovil.jsp"></jsp:include>
+
+			<div class="col p-0 min-vh-10">
 				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 					<div class="container-fluid">
 						<span id="currentDateTime" class="nav-link text-white"> <span
 							id="currentTime" style="font-size: 34px;"></span> - <span
 							id="currentDate"></span>
 						</span>
-						<button class="navbar-toggler" type="button"
-							data-bs-toggle="collapse" data-bs-target="#navbarNav"
-							aria-controls="navbarNav" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
+
+						<button id="hamburgerButton" class="hamburger-button hide-on-lg"
+							data-bs-toggle="offcanvas" data-bs-target="#intro">
+							<span class="hamburger-line"></span> <span class="hamburger-line"></span>
+							<span class="hamburger-line"></span>
 						</button>
-						<div class="collapse navbar-collapse justify-content-end"
-							id="navbarNav">
-							<ul class="navbar-nav">
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle text-white" href="#"
-									id="logoutDropdown" role="button" data-bs-toggle="dropdown"
-									aria-expanded="false"> Cerrar sesión </a>
-									<ul class="dropdown-menu dropdown-menu-end"
-										aria-labelledby="logoutDropdown">
-										<li>
-											<div class="d-flex flex-column align-items-center p-3">
-												<img src="img\iconoUSUARIO.png" alt="Logo CASSIATEC"
-													class="logo-img" style="height: 6rem"><span
-													class="align-self-center">Auxiliar</span>
-												<button class="btn btn-danger mt-2" data-bs-toggle="modal"
-													data-bs-target="#confirmLogoutModal">Cerrar sesión</button>
-											</div>
-										</li>
-									</ul></li>
-							</ul>
-						</div>
+
 					</div>
 				</nav>
+
 				<script>
 					// Obtener el elemento para mostrar la hora y fecha y actualizarlo cada segundo
 					var currentDateTimeElement = document
@@ -199,42 +317,6 @@ html, body {
 					}
 				</script>
 
-				<!-- Modal -->
-				<div class="modal fade" id="confirmLogoutModal" tabindex="-1"
-					aria-labelledby="confirmLogoutModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="confirmLogoutModalLabel">Confirmar
-									cierre de sesión</h5>
-								<button type="button" class="btn-close" data-bs-dismiss="modal"
-									aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-								<div class="text-center mx-auto">
-									<img src="img\cerrarSESION.png" alt="Logo CASSIATEC"
-										class="logo-img" style="height: 6rem">
-									<H4>
-										<span>¿Desea cerrar <br>sesion?
-										</span>
-									</H4>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<div class="text-center mx-auto">
-									<button type="button" class="btn btn-danger"
-										onclick="cerrarSesion()">Cerrar sesión</button>
-									<script>
-										function cerrarSesion() {
-											// Redireccionar a la página de inicio de sesión
-											window.location.href = "index.jsp";
-										}
-									</script>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
 				<div class="p-0">
 					<div class="container">
@@ -341,6 +423,7 @@ html, body {
 							</div>
 						</div>
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>
