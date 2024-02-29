@@ -248,14 +248,14 @@ th.table-header {
 							</div>
 						</div>
 
-
 						<div class="col-6 mb-3">
 							<form
 								action="Controlador2?studentId=${param.studentId}&studentDocument=${param.studentDocument}&studentNames=${param.studentNames}&studentLastNames=${param.studentLastNames}"
 								method="POST">
 								<h2>Filtrar por fecha</h2>
 								<div class="row">
-									<input type="hidden" name="studentId" value="${param.studentId}">
+									<input type="hidden" name="studentId"
+										value="${param.studentId}">
 									<div class="col-6 mb-3">
 										<h5>Fecha de inicio</h5>
 										<input type="date" class="form-control" name="txtFechaInicio"
@@ -270,7 +270,16 @@ th.table-header {
 								</div>
 
 								<input class="btn btn-success" type="submit" name="accion"
-									value="GenerarReporteFiltroFecha">
+									value="GenerarReporteFiltroFecha"> 
+							</form>
+
+							<form
+								action="Controlador2?studentId=${param.studentId}&studentDocument=${param.studentDocument}&studentNames=${param.studentNames}&studentLastNames=${param.studentLastNames}"
+								method="POST">
+								<input type="hidden" name="studentId" value="${param.studentId}">
+
+								<input class="btn btn-info" type="submit" name="accion"
+									value="VerReportesCompleto">
 							</form>
 						</div>
 					</div>

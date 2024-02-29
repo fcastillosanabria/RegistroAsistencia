@@ -406,7 +406,7 @@ td.table-cell {
 								<table class="table table-bordered" id="tablaPerson">
 									<thead>
 										<tr>
-											<th class="table-header">ID</th>
+											<th class="table-header">ID estudiante</th>
 											<th class="table-header">N° DOC</th>
 											<th class="table-header">APELLIDO, NOMBRES</th>
 											<th class="table-header">Fecha: <%=day + "/" + month + "/" + year%></th>
