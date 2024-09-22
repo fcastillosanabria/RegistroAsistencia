@@ -11,7 +11,7 @@ from tkinter import messagebox
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 # Fecha de vencimiento del programa (cambiar según sea necesario)
-fecha_vencimiento = datetime(2023, 12, 12) # YY/MM/DD
+fecha_vencimiento = datetime(2025, 12, 12) # YY/MM/DD
 
 # Verifica si el programa ha caducado
 if datetime.now() > fecha_vencimiento:
